@@ -2,6 +2,7 @@ package com.example.jsuisla;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.View;

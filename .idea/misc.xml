@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/sebam/Downloads/Android/Android/Exercices/JsuisLa/app/src/main/res/layout/activity_main.xml" value="0.1796875" />
+        <entry key="..\:/Users/sebam/Downloads/Android/Android/Exercices/JsuisLa/app/src/main/res/layout/activity_main.xml" value="0.132" />
+        <entry key="..\:/Users/sebam/Downloads/Android/Android/Exercices/JsuisLa/app/src/main/res/layout/configure_message.xml" value="0.1" />
+        <entry key="..\:/Users/sebam/Downloads/Android/Android/Exercices/JsuisLa/app/src/main/res/layout/fragment_configure_message.xml" value="0.1" />
+        <entry key="..\:/Users/sebam/Downloads/Android/Android/Exercices/JsuisLa/app/src/main/res/layout/fragment_write.xml" value="0.2" />
+        <entry key="..\:/Users/sebam/Downloads/Android/Android/Exercices/JsuisLa/app/src/main/res/layout/fragment_write_message.xml" value="0.10144927536231885" />
       </map>
     </option>
   </component>

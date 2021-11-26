@@ -20,15 +20,17 @@
         tools:layout_editor_absoluteX="-61dp"
         tools:layout_editor_absoluteY="0dp">
 
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView4"
+            android:name="com.example.jsuisla.FragmentWrite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="45dp"
+            tools:layout_editor_absoluteY="230dp"
+            tools:layout="@layout/fragment_write" />
 
     </RelativeLayout>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView4"
-        android:name="com.example.jsuisla.FragmentWrite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="45dp"
-        tools:layout_editor_absoluteY="230dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

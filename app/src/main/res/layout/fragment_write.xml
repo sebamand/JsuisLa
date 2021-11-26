@@ -11,7 +11,7 @@
         android:layout_width="210dp"
         android:layout_height="108dp"
         android:ems="10"
-        android:hint="Saisissez votre texte ici..."
+        android:hint="c'est le bon ici..."
         android:inputType="textLongMessage"
         android:selectAllOnFocus="false"
         android:singleLine="false"

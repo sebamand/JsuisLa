@@ -19,12 +19,10 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView5"
-        android:name="com.example.jsuisla.FragmentWrite"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="51dp"
-        tools:layout_editor_absoluteY="276dp"
-        tools:layout="@layout/fragment_write" />
+        tools:layout_editor_absoluteY="276dp"/>
 
 
 

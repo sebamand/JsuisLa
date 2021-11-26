@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,11 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentWrite#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class FragmentWrite extends Fragment {
 
     public Button butonValidText;
@@ -27,12 +25,14 @@ public class FragmentWrite extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
+        super.onCreate(savedInstanceState);
+        String someInt = requireArguments().getString("some_int");
         View root = inflater.inflate(R.layout.fragment_write, container, true);
         butonValidText = (Button)root.findViewById(R.id.ButtonValidText);
         butonValidText.setOnClickListener(ValidText);
         editText = (EditText)root.findViewById(R.id.editText);
         String text = editText.getText().toString();
+        editText.setText(someInt);
 
         return root;
     }

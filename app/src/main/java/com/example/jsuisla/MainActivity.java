@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity{
     {
         @Override
         public void onClick(View v){
+
             textView.setBackground(null);
             textView.setText(bundle.getString("frgm_write"));
         }

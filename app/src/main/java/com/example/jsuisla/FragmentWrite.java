@@ -1,5 +1,6 @@
 package com.example.jsuisla;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -36,13 +37,15 @@ public class FragmentWrite extends Fragment {
 
         return root;
     }
-
+    //last_version
 
     private View.OnClickListener ValidText = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             text = editText.getText().toString();
-            requireArguments().putString("fgm_write", text);
+            Intent in = new Intent(getActivity(), MainActivity.class);
+            in.putExtra("frgm_write",text);
+            //requireArguments().putString("fgm_write", text);
             //savedInstanceState.putString("fgm_write", text);
         }
     };

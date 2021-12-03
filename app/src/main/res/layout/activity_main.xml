@@ -14,7 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:text="pas de texte"
-        android:background="@drawable/degrader_ori_android" />
+        android:background="@drawable/logo" />
 
 
 

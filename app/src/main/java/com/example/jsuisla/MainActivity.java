@@ -31,8 +31,9 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             bundle = new Bundle();
-            bundle.putString("some_int", "Oui mon string vient du main");
+            //bundle.putString("some_int", "Oui mon string vient du main");
             fragmentWrite = new FragmentWrite();
+            fragmentWrite.setMessage("oui le string vient du main");
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
                     .add(R.id.fragmentContainerView5, fragmentWrite)

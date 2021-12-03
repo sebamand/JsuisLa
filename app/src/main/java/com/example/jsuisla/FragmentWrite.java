@@ -21,11 +21,14 @@ public class FragmentWrite extends Fragment {
     public Button butonValidText;
     public EditText editText;
     private Bundle savedInstanceState;
-    private String text;
+    private String message;
 
     public FragmentWrite() {
     }
 
+    public void setMessage(String pmessage){
+        this.message = pmessage;
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,23 +37,22 @@ public class FragmentWrite extends Fragment {
         this.savedInstanceState = savedInstanceState;
         //String someInt = requireArguments().getString("some_int");
         Intent in = new Intent(getActivity(), MainActivity.class);
-        String someInt = in.getStringExtra("some_int");
         View root = inflater.inflate(R.layout.fragment_write, container, false);
         butonValidText = (Button)root.findViewById(R.id.ButtonValidText);
         butonValidText.setOnClickListener(ValidText);
         editText = (EditText)root.findViewById(R.id.editText);
-        editText.setText(someInt);
+        editText.setText(message);
         return root;
     }
 
     public String getMessageContent(){
-        return this.text;
+        return this.message;
     }
 
     private View.OnClickListener ValidText = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            text = editText.getText().toString();
+            message = editText.getText().toString();
             //requireArguments().putString("fgm_write", text);
             //savedInstanceState.putString("fgm_write", text);
         }

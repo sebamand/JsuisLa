@@ -19,28 +19,31 @@ public class FragmentWrite extends Fragment {
 
     public Button butonValidText;
     public EditText editText;
-
+    private Bundle savedInstanceState;
     private String text;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         super.onCreate(savedInstanceState);
+        this.savedInstanceState = savedInstanceState;
         String someInt = requireArguments().getString("some_int");
-        View root = inflater.inflate(R.layout.fragment_write, container, true);
+        View root = inflater.inflate(R.layout.fragment_write, container, false);
         butonValidText = (Button)root.findViewById(R.id.ButtonValidText);
         butonValidText.setOnClickListener(ValidText);
         editText = (EditText)root.findViewById(R.id.editText);
-        String text = editText.getText().toString();
         editText.setText(someInt);
 
         return root;
     }
 
+
     private View.OnClickListener ValidText = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Log.i("DEBUG", text);
+            text = editText.getText().toString();
+            requireArguments().putString("fgm_write", text);
+            //savedInstanceState.putString("fgm_write", text);
         }
     };
 

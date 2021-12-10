@@ -20,21 +20,18 @@ public class FragmentWrite extends Fragment {
 
     public Button butonValidText;
     public EditText editText;
-    private Bundle savedInstanceState;
+
     private String message;
 
+    private fragment_config fgmConfig;
     public FragmentWrite() {
     }
 
-    public void setMessage(String pmessage){
-        this.message = pmessage;
-    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         super.onCreate(savedInstanceState);
-        this.savedInstanceState = savedInstanceState;
         //String someInt = requireArguments().getString("some_int");
         Intent in = new Intent(getActivity(), MainActivity.class);
         View root = inflater.inflate(R.layout.fragment_write, container, false);
@@ -42,6 +39,7 @@ public class FragmentWrite extends Fragment {
         butonValidText.setOnClickListener(ValidText);
         editText = (EditText)root.findViewById(R.id.editText);
         editText.setText(message);
+        //root.findViewById(R.id.fragmentContainerView5)
         return root;
     }
 
@@ -49,12 +47,19 @@ public class FragmentWrite extends Fragment {
         return this.message;
     }
 
+
+    public void setMessage(String pmessage){
+        this.message = pmessage;
+    }
+
     private View.OnClickListener ValidText = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             message = editText.getText().toString();
-            //requireArguments().putString("fgm_write", text);
-            //savedInstanceState.putString("fgm_write", text);
+            fgmConfig = new fragment_config();
+            fgmConfig.setMessage("ça marche");
+            //getActivity().getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainerView6,fgmConfig);
+            //getActivity().getSupportFragmentManager().beginTransaction().remove(FragmentWrite.this).commit();
         }
     };
 

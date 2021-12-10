@@ -5,11 +5,15 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainer;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentOnAttachListener;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.zip.Inflater;
@@ -21,40 +25,35 @@ public class MainActivity extends AppCompatActivity{
 
 
 
-    public TextView textView;
-    public Bundle bundle;
-    public FragmentWrite fragmentWrite;
 
+    public Bundle bundle;
+    public ImageButton btnNewMessage;
+    public ImageButton oldMessage;
+    public ImageButton configUser;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             bundle = new Bundle();
-            //bundle.putString("some_int", "Oui mon string vient du main");
-            fragmentWrite = new FragmentWrite();
-            fragmentWrite.setMessage("oui le string vient du main");
-            getSupportFragmentManager().beginTransaction()
-                    .setReorderingAllowed(true)
-                    .add(R.id.fragmentContainerView5, fragmentWrite)
-                    .commit();
-
+            
+            btnNewMessage = (ImageButton) findViewById(R.id.button_New_Message);
+            oldMessage = (ImageButton) findViewById(R.id.button_Old_Message);
+            configUser = (ImageButton) findViewById(R.id.button_Config_User);
         }
 
-        textView = (TextView) findViewById(R.id.text_home);
-        textView.setOnClickListener(AfficheText);
+
 
     }
 
-    public View.OnClickListener AfficheText = new View.OnClickListener()
-    {
-        @Override
-        public void onClick(View v){
+    public void NewMessage(View view){
+        Intent intent = new Intent(MainActivity.this,NewMessageActivity.class);
+        startActivity(intent);
+    }
 
-            textView.setBackground(null);
-            String textMessage = fragmentWrite.getMessageContent();
-            textView.setText(textMessage);
-        }
-    };
+
+
+
 
 }

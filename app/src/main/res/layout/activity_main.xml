@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient"
     tools:context=".MainActivity">
 
     <TextView
@@ -18,12 +19,34 @@
 
 
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView5"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="51dp"
-        tools:layout_editor_absoluteY="276dp"/>
+    <ImageButton
+        android:id="@+id/button_New_Message"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/text_home"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="50dp"
+        android:onClick="NewMessage" />
+
+    <ImageButton
+        android:id="@+id/button_Old_Message"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/text_home"
+        android:layout_toRightOf="@+id/button_New_Message"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="50dp"
+        />
+
+    <ImageButton
+        android:id="@+id/button_Config_User"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/button_New_Message"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        />
 
 
 

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ConfigMessage">
+    tools:context=".ConfigMessage"
+    android:background="@drawable/gradient">
 
 
 
@@ -20,8 +21,13 @@
             android:layout_centerHorizontal="true"
             android:layout_marginStart="45dp"
             android:layout_marginTop="20dp"
+            android:autoText="false"
+            android:background="#D8B5EC"
+            android:elegantTextHeight="true"
             android:text="Le message s'affiche ici"
-            />
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textIsSelectable="false" />
 
         <TextView
             android:id="@+id/textView"

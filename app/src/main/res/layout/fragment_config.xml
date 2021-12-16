@@ -3,19 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment_config">
+    tools:context=".fragment_config"
+    android:background="@drawable/gradient">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/TV_affiche_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="205dp"
+            android:layout_height="123dp"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="45dp"
             android:layout_marginTop="20dp"
-            />
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/textView"
@@ -43,9 +45,8 @@
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="addresse postale"
                 android:layout_marginLeft="40dp"
-                />
+                android:hint="addresse postale" />
 
             <RadioButton
                 android:layout_width="wrap_content"
@@ -57,11 +58,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="date" />
+                android:inputType="datetime" />
 
 
         </RadioGroup>
-
 
 
     </RelativeLayout>

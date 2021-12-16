@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentWrite">
+    tools:context=".FragmentWrite"
+    android:background="@drawable/gradient">
 
     <EditText
         android:id="@+id/editText"
         android:layout_width="210dp"
         android:layout_height="108dp"
         android:ems="10"
-        android:hint="c'est le bon ici..."
+        android:hint="Ecriver votre message..."
         android:inputType="textLongMessage"
         android:selectAllOnFocus="false"
         android:singleLine="false"

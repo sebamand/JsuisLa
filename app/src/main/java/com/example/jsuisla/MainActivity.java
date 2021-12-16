@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity{
 
 
 
+    private static final int MY_PERMISSION_REQUEST_CODE_SEND_SMS = 1;
 
 
     public Bundle bundle;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity{
             btnNewMessage = (ImageButton) findViewById(R.id.button_New_Message);
             oldMessage = (ImageButton) findViewById(R.id.button_Old_Message);
             configUser = (ImageButton) findViewById(R.id.button_Config_User);
+
         }
 
 

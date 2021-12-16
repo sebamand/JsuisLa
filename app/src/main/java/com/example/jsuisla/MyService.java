@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
+import java.util.Calendar;
 import java.util.Random;
 
 
@@ -29,6 +30,7 @@ public class MyService extends Service {
         Random r;
         int NotID = 1;
         NotificationManager notificationManager;
+        private Context context;
 
         // Handler that receives messages from the thread
         private final class ServiceHandler extends Handler {
@@ -42,40 +44,67 @@ public class MyService extends Service {
                 // For our sample, we just sleep for 5 seconds.
                 //setup how many messages
                 notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                Integer times = 0, i;
+                Integer year,month,day,hour,minutes;
                 Messenger messenger = null;
                 Bundle extras = msg.getData();
 
+                Calendar currentDate = Calendar.getInstance();
+                Calendar calendar = Calendar.getInstance();
 
                 if (extras != null) {
-                    times = extras.getInt("times", 0);
+
+                    year = extras.getInt("year");
+                    month = extras.getInt("month");
+                    day = extras.getInt("day");
+                    hour = extras.getInt("hour");
+                    minutes = extras.getInt("minutes");
+
                     messenger = (Messenger) extras.get("MESSENGER");
+
+
+                    calendar.set(year,month,day,hour,minutes,0);
+                    calendar.set(Calendar.HOUR_OF_DAY, hour);
                 }
-                for (i = 0; i < times; i++) {
+
+                boolean isbefore = currentDate.before(calendar);
+
+                while (currentDate.before(calendar)) {
                     synchronized (this) {
                         try {
-                            wait(100);
+                            wait(500);
                         } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
                     }
-                    String info = "Service run " + new Integer(i+1).toString() + "/" +times.toString() + " random value: " + r.nextInt(100);
-                    Log.d("intentServer", info);
-                    if (messenger != null) {
-                        Message mymsg = Message.obtain();
-                        mymsg.obj = info;
-                        try {
-                            messenger.send(mymsg);
-                        } catch (android.os.RemoteException e1) {
-                            Log.w(getClass().getName(), "Exception sending message", e1);
-                        }
-                   // } else {
-                        //no handler, so use notification
-                        makeNotification(info);
-                    }
+                    currentDate = Calendar.getInstance();
+
                 }
+
+                    if(currentDate.after(calendar)){
+                        String info = "Service run ";
+                        Log.d("intentServer", info);
+                        if (messenger != null) {
+                            Message mymsg = Message.obtain();
+                            mymsg.obj = info;
+                            try {
+                                messenger.send(mymsg);
+                            } catch (android.os.RemoteException e1) {
+                                Log.w(getClass().getName(), "Exception sending message", e1);
+                            }
+                        }
+                        // } else {
+                        //no handler, so use notification
+                        makeNotification(info + "calendar :"+calendar.get(Calendar.YEAR)+calendar.get(Calendar.MONTH)+ calendar.get(Calendar.DAY_OF_MONTH) + "// Current : "+ currentDate.toString());
+                        Toast.makeText(context,"je suis dans le if"+calendar.get(Calendar.DAY_OF_MONTH)+calendar.get(Calendar.MONTH)+calendar.get(Calendar.YEAR)+"--"+calendar.get(Calendar.HOUR_OF_DAY)+calendar.get(Calendar.MINUTE),Toast.LENGTH_LONG).show();
+                        Toast.makeText(context,"je suis toujours dans le if"+currentDate.get(Calendar.DAY_OF_MONTH)+currentDate.get(Calendar.MONTH)+currentDate.get(Calendar.YEAR)+"--"+currentDate.get(Calendar.HOUR_OF_DAY)+currentDate.get(Calendar.MINUTE),Toast.LENGTH_LONG).show();
+
+                        stopSelf(msg.arg1);
+                    }
+
+
                 // Stop the service using the startId, so that we don't stop
                 // the service in the middle of handling another job
-                stopSelf(msg.arg1);
+
             }
         }
 
@@ -98,6 +127,7 @@ public class MyService extends Service {
         public int onStartCommand(Intent intent, int flags, int startId) {
             Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
 
+            context = this;
             // For each start request, send a message to start a job and deliver the
             // start ID so we know which request we're stopping when we finish the job
             Message msg = mServiceHandler.obtainMessage();

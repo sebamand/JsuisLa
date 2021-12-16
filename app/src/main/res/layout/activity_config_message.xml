@@ -5,10 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ConfigMessage">
+<ScrollView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
 
         <TextView
             android:id="@+id/TV_affiche_message"
@@ -58,12 +63,26 @@
                 android:layout_height="wrap_content"
                 android:text="En Fonction d'une Heure" />
 
-            <EditText
-                android:id="@+id/ET_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="time" />
+                <TextView
+                    android:id="@+id/TV_Date"
+                    android:hint="Click here to set Date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    />
+
+                <TextView
+                    android:id="@+id/TV_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Click here to set Time"
+                    android:inputType="time"
+                    android:layout_toRightOf="@+id/TV_Date"
+                    />
+
+
+
 
 
         </RadioGroup>
@@ -78,4 +97,6 @@
             />
 
     </RelativeLayout>
+
+</ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

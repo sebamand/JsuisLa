@@ -4,13 +4,16 @@ import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
@@ -33,7 +36,10 @@ import java.util.Calendar;
 public class ConfigMessage extends AppCompatActivity {
 
     TextView TVmessage;
+
     String message;
+    String phoneNumber;
+
     RadioGroup radioGroup;
     RadioButton RB_adress;
     RadioButton RB_time;
@@ -44,8 +50,7 @@ public class ConfigMessage extends AppCompatActivity {
     Boolean conf_position = false;
     Boolean conf_time = false;
 
-    public static final int PERM_COMPLETED_STORAGE_ACCESS = 1;
-    public static final int WRITE_FILE_REQUEST_CODE = 43;
+    private static final int MY_PERMISSION_REQUEST_CODE_SEND_SMS = 1;
 
     private int lastSelectedHour = -1;
     private int lastSelectedMinute = -1;
@@ -65,6 +70,7 @@ public class ConfigMessage extends AppCompatActivity {
         Intent intent = getIntent();
 
         message = intent.getStringExtra("message");
+        phoneNumber = intent.getStringExtra("phoneNumber");
 
         TVmessage = (TextView) findViewById(R.id.TV_affiche_message);
         TVmessage.setText(message);
@@ -140,6 +146,8 @@ public class ConfigMessage extends AppCompatActivity {
     });
 
     public void ValidConfig(View view){
+        askPermissionAndSendSMS();
+
         if(conf_time){
             final Calendar current = Calendar.getInstance();
             final Calendar toValid = Calendar.getInstance();
@@ -152,7 +160,8 @@ public class ConfigMessage extends AppCompatActivity {
                 intent.putExtra("day", toValid.get(Calendar.DAY_OF_MONTH));
                 intent.putExtra("hour", toValid.get(Calendar.HOUR_OF_DAY));
                 intent.putExtra("minutes", toValid.get(Calendar.MINUTE));
-
+                intent.putExtra("phoneNumber",phoneNumber);
+                intent.putExtra("message",message);
 
                 //intent.putExtra("calendar", toValid);
 
@@ -232,5 +241,42 @@ public class ConfigMessage extends AppCompatActivity {
 
         // Show
         timePickerDialog.show();
+    }
+
+    private void askPermissionAndSendSMS() {
+
+        // With Android Level >= 23, you have to ask the user
+        // for permission to send SMS.
+        if (android.os.Build.VERSION.SDK_INT >=  android.os.Build.VERSION_CODES.M) { // 23
+
+            // Check if we have send SMS permission
+            int sendSmsPermisson = ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.SEND_SMS);
+
+            if (sendSmsPermisson != PackageManager.PERMISSION_GRANTED) {
+                // If don't have permission so prompt the user.
+                this.requestPermissions(
+                        new String[]{Manifest.permission.SEND_SMS},
+                        MY_PERMISSION_REQUEST_CODE_SEND_SMS
+                );
+                return;
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == MY_PERMISSION_REQUEST_CODE_SEND_SMS) {
+            if (resultCode == RESULT_OK) {
+                // Do something with data (Result returned).
+                Toast.makeText(this, "Action OK", Toast.LENGTH_LONG).show();
+            } else if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "Action canceled", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Action Failed", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

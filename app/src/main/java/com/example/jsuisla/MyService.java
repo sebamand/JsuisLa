@@ -13,6 +13,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.Process;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -27,10 +28,9 @@ public class MyService extends Service {
         private Looper mServiceLooper;
         private ServiceHandler mServiceHandler;
         //my variables
-        Random r;
+        private String message,phoneNumber;
         int NotID = 1;
         NotificationManager notificationManager;
-        private Context context;
 
         // Handler that receives messages from the thread
         private final class ServiceHandler extends Handler {
@@ -58,6 +58,8 @@ public class MyService extends Service {
                     day = extras.getInt("day");
                     hour = extras.getInt("hour");
                     minutes = extras.getInt("minutes");
+                    phoneNumber = extras.getString("phoneNumber");
+                    message = extras.getString("message");
 
                     messenger = (Messenger) extras.get("MESSENGER");
 
@@ -95,9 +97,7 @@ public class MyService extends Service {
                         // } else {
                         //no handler, so use notification
                         makeNotification(info + "calendar :"+calendar.get(Calendar.YEAR)+calendar.get(Calendar.MONTH)+ calendar.get(Calendar.DAY_OF_MONTH) + "// Current : "+ currentDate.toString());
-                        Toast.makeText(context,"je suis dans le if"+calendar.get(Calendar.DAY_OF_MONTH)+calendar.get(Calendar.MONTH)+calendar.get(Calendar.YEAR)+"--"+calendar.get(Calendar.HOUR_OF_DAY)+calendar.get(Calendar.MINUTE),Toast.LENGTH_LONG).show();
-                        Toast.makeText(context,"je suis toujours dans le if"+currentDate.get(Calendar.DAY_OF_MONTH)+currentDate.get(Calendar.MONTH)+currentDate.get(Calendar.YEAR)+"--"+currentDate.get(Calendar.HOUR_OF_DAY)+currentDate.get(Calendar.MINUTE),Toast.LENGTH_LONG).show();
-
+                        sendSMS_by_smsManager();
                         stopSelf(msg.arg1);
                     }
 
@@ -110,7 +110,6 @@ public class MyService extends Service {
 
         @Override
         public void onCreate() {
-            r = new Random();
             // Start up the thread running the service.  Note that we create a
             // separate thread because the service normally runs in the process's
             // main thread, which we don't want to block.  We also make it
@@ -127,7 +126,6 @@ public class MyService extends Service {
         public int onStartCommand(Intent intent, int flags, int startId) {
             Toast.makeText(this, "service starting", Toast.LENGTH_SHORT).show();
 
-            context = this;
             // For each start request, send a message to start a job and deliver the
             // start ID so we know which request we're stopping when we finish the job
             Message msg = mServiceHandler.obtainMessage();
@@ -164,5 +162,28 @@ public class MyService extends Service {
             notificationManager.notify(NotID, notification);
             NotID++;
         }
+
+    private void sendSMS_by_smsManager()  {
+
+
+
+        try {
+            // Get the default instance of the SmsManager
+            SmsManager smsManager = SmsManager.getDefault();
+            // Send Message
+            smsManager.sendTextMessage(phoneNumber,
+                    null,
+                    message,
+                    null,
+                    null);
+
+            Toast.makeText(getApplicationContext(),"Your sms has successfully sent!",
+                    Toast.LENGTH_LONG).show();
+        } catch (Exception ex) {
+            Toast.makeText(getApplicationContext(),"Your sms has failed... " + ex.getMessage() + phoneNumber,
+                    Toast.LENGTH_LONG).show();
+            ex.printStackTrace();
+        }
+    }
     }
 

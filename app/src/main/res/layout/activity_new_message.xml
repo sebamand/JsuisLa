@@ -12,11 +12,27 @@
         android:layout_width="210dp"
         android:layout_height="108dp"
         android:ems="10"
-        android:hint="c'est le bon ici..."
+        android:hint="Dites ici à votre ami que vous êtes devant chez lui !"
         android:inputType="textLongMessage"
         android:selectAllOnFocus="false"
         android:singleLine="false"
+        app:layout_constraintBottom_toTopOf="@+id/editText_phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText_phone"
+        android:layout_width="210dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:hint="n° de tel de votre BFFEN (best friend forever en retard)"
+        android:inputType="phone"
+        android:selectAllOnFocus="false"
+        android:singleLine="true"
+        android:layout_marginTop="50dp"
         app:layout_constraintBottom_toTopOf="@+id/ButtonValidText"
+        app:layout_constraintTop_toBottomOf="@+id/editText_message"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

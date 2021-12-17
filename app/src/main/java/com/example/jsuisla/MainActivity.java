@@ -1,13 +1,16 @@
 package com.example.jsuisla;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainer;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentOnAttachListener;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.Layout;
 import android.view.View;
@@ -22,9 +25,6 @@ public class MainActivity extends AppCompatActivity{
 
     //token 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
 
-
-
-    private static final int MY_PERMISSION_REQUEST_CODE_SEND_SMS = 1;
 
 
     public Bundle bundle;
@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity{
             oldMessage = (ImageButton) findViewById(R.id.button_Old_Message);
             configUser = (ImageButton) findViewById(R.id.button_Config_User);
 
+
+
         }
 
 
@@ -53,6 +55,8 @@ public class MainActivity extends AppCompatActivity{
         Intent intent = new Intent(MainActivity.this,NewMessageActivity.class);
         startActivity(intent);
     }
+
+
 
 
 

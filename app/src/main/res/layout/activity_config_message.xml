@@ -59,13 +59,14 @@
                 android:layout_height="wrap_content"
                 android:hint="addresse postale"
                 android:layout_marginLeft="40dp"
+                android:visibility="invisible"
                 />
 
             <RadioButton
                 android:id="@+id/RB_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="En Fonction d'une Heure" />
+                android:text="En Fonction d'une Date/Heure" />
 
                 <TextView
                     android:id="@+id/TV_Date"

@@ -83,21 +83,8 @@ public class MyService extends Service {
                 }
 
                     if(currentDate.after(calendar)){
-                        String info = "Service run ";
-                        Log.d("intentServer", info);
-                        if (messenger != null) {
-                            Message mymsg = Message.obtain();
-                            mymsg.obj = info;
-                            try {
-                                messenger.send(mymsg);
-                            } catch (android.os.RemoteException e1) {
-                                Log.w(getClass().getName(), "Exception sending message", e1);
-                            }
-                        }
-                        // } else {
-                        //no handler, so use notification
-                        makeNotification(info + "calendar :"+calendar.get(Calendar.YEAR)+calendar.get(Calendar.MONTH)+ calendar.get(Calendar.DAY_OF_MONTH) + "// Current : "+ currentDate.toString());
-                        sendSMS_by_smsManager();
+                        if(sendSMS_by_smsManager())
+                            makeNotification("Vous venez d'envoyer un sms au " + phoneNumber + " : " + message);
                         stopSelf(msg.arg1);
                     }
 
@@ -153,7 +140,7 @@ public class MyService extends Service {
             Notification notification = new NotificationCompat.Builder(getApplicationContext(), ConfigMessage.id)
                     .setSmallIcon(R.drawable.logo)
                     .setWhen(System.currentTimeMillis())  //When the event occurred, now, since noti are stored by time.
-                    .setContentTitle("Service")   //Title message top row.
+                    .setContentTitle("JsuisLà")   //Title message top row.
                     .setContentText(message)  //message when looking at the notification, second row
                     .setAutoCancel(true)   //allow auto cancel when pressed.
                     .build();  //finally build and return a Notification.
@@ -163,7 +150,7 @@ public class MyService extends Service {
             NotID++;
         }
 
-    private void sendSMS_by_smsManager()  {
+    private boolean sendSMS_by_smsManager()  {
 
 
 
@@ -179,10 +166,14 @@ public class MyService extends Service {
 
             Toast.makeText(getApplicationContext(),"Your sms has successfully sent!",
                     Toast.LENGTH_LONG).show();
+            return true;
         } catch (Exception ex) {
-            Toast.makeText(getApplicationContext(),"Your sms has failed... " + ex.getMessage() + phoneNumber,
+            Toast.makeText(getApplicationContext(),"Your sms has failed... " + ex.getMessage(),
                     Toast.LENGTH_LONG).show();
+            makeNotification("Your sms has failed... " + ex.getMessage());
             ex.printStackTrace();
+            return false;
+
         }
     }
     }

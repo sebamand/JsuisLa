@@ -3,6 +3,7 @@ package com.example.jsuisla;
 import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -43,7 +44,6 @@ public class ConfigMessage extends AppCompatActivity {
     RadioGroup radioGroup;
     RadioButton RB_adress;
     RadioButton RB_time;
-    EditText ET_adresse;
     TextView TV_time;
     TextView TV_Date;
 
@@ -111,6 +111,7 @@ public class ConfigMessage extends AppCompatActivity {
         TV_Date.setVisibility(View.INVISIBLE);
 
         RB_adress = (RadioButton) findViewById(R.id.RB_position);
+        RB_adress.setVisibility(View.INVISIBLE);
         RB_time = (RadioButton) findViewById(R.id.RB_time);
 
         radioGroup = (RadioGroup) findViewById(R.id.radio_group_condition);
@@ -125,10 +126,12 @@ public class ConfigMessage extends AppCompatActivity {
     public void radioChange(int checkedId){
         if (checkedId == R.id.RB_position){
             conf_position = true;
+            conf_time = false;
             TV_time.setVisibility(View.INVISIBLE);
             TV_Date.setVisibility(View.INVISIBLE);
         }else if(checkedId == R.id.RB_time){
             conf_time = true;
+            conf_position = false;
             TV_time.setVisibility(View.VISIBLE);
             TV_Date.setVisibility(View.VISIBLE);
         }
@@ -174,6 +177,16 @@ public class ConfigMessage extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), "Merci d'entrer une date supérieur à la date actuelle", Toast.LENGTH_LONG).show();
             }
 
+        }else if (conf_position){
+            new AlertDialog.Builder(ConfigMessage.this)
+                    .setTitle("Partie non développé")
+                    .setMessage("Cette fonctionnalité n'est pas encore disponible:\nelle vous permettra d'envoyer un message en fonction de votre position")
+                    .show();
+        }else{
+            new AlertDialog.Builder(ConfigMessage.this)
+                    .setTitle("Condition d'envoi obligatoire")
+                    .setMessage("Merci de sélectionner les condition d'envoi (pour l'instant seul en fonction de la date est disponible...)")
+                    .show();
         }
     }
     /**

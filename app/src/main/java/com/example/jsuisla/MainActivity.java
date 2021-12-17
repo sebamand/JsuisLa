@@ -1,5 +1,6 @@
 package com.example.jsuisla;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -31,7 +32,6 @@ public class MainActivity extends AppCompatActivity{
     public ImageButton btnNewMessage;
     public ImageButton oldMessage;
     public ImageButton configUser;
-    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +40,11 @@ public class MainActivity extends AppCompatActivity{
             bundle = new Bundle();
             
             btnNewMessage = (ImageButton) findViewById(R.id.button_New_Message);
+            /*
             oldMessage = (ImageButton) findViewById(R.id.button_Old_Message);
+            oldMessage.setVisibility(View.INVISIBLE);
             configUser = (ImageButton) findViewById(R.id.button_Config_User);
-
+            */
 
 
         }
@@ -54,6 +56,20 @@ public class MainActivity extends AppCompatActivity{
     public void NewMessage(View view){
         Intent intent = new Intent(MainActivity.this,NewMessageActivity.class);
         startActivity(intent);
+    }
+
+    public void OldMessage(View view){
+        new AlertDialog.Builder(MainActivity.this)
+                .setTitle("Partie non développé")
+                .setMessage("Cette fonctionnalité n'est pas encore disponible elle vous permettra d'accéder au ancien messages programmer, modifier leur date d'envoie ect...")
+                .show();
+    }
+
+    public void ConfigUser(View view){
+        new AlertDialog.Builder(MainActivity.this)
+                .setTitle("Partie non développé")
+                .setMessage("Cette fonctionnalité n'est pas encore disponible elle vous permettra de signer le message et d'intervenir surles autres paramètres utilisateurs.")
+                .show();
     }
 
 
